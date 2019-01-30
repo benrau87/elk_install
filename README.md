@@ -2,3 +2,7 @@
 Some shit to help with installing elk 6.6
 
 Uncomment server.host under /etc/kibana/kibana.yml and change to server.host" "0.0.0.0" and you can access your webui from http://IP_ADDRESS:5601
+
+Change /etc/filebeat/modules.d/iis.yml under access:
+  var.paths["/iislogs/*.*]
+  
