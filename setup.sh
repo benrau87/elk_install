@@ -41,7 +41,8 @@ filebeat modules enable iis
 filebeat setup -e
 
 mkdir /logs
-chmod 755 /logs
+chown nobody.nogroup /logs
+chmod 777 /logs
 
 apt install samba -y
 
@@ -54,10 +55,11 @@ echo "map to guest = bad user" >> /etc/samba/smb.conf
 echo "dns proxy = no" >> /etc/samba/smb.conf
 echo "[Logs]" >> /etc/samba/smb.conf
 echo "path = /logs" >> /etc/samba/smb.conf
-echo "browsable =yes" >> /etc/samba/smb.conf
-echo "writable = yes" >> /etc/samba/smb.conf
-echo "guest ok = yes" >> /etc/samba/smb.conf
+echo "writeable = yes" >> /etc/samba/smb.conf
+echo "browseable = yes" >> /etc/samba/smb.conf
 echo "read only = no" >> /etc/samba/smb.conf
+echo "guest ok = yes" >> /etc/samba/smb.conf
+echo "create mask = 777" >> /etc/samba/smb.conf
 
 systemctl enable smb.service
 systemctl enable nmb.service
