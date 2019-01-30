@@ -50,7 +50,7 @@ echo "netbios name = sof-elk" >> /etc/samba/smb.conf
 echo "security = user" >> /etc/samba/smb.conf
 echo "map to guest = bad user" >> /etc/samba/smb.conf
 echo "dns proxy = no" >> /etc/samba/smb.conf
-echo "[Anonymous]" >> /etc/samba/smb.conf
+echo "[IIS_Logs]" >> /etc/samba/smb.conf
 echo "path = /iislogs" >> /etc/samba/smb.conf
 echo "browsable =yes" >> /etc/samba/smb.conf
 echo "writable = yes" >> /etc/samba/smb.conf
