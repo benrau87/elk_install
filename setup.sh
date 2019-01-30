@@ -14,6 +14,7 @@ sudo apt-get install apt-transport-https
 echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-6.x.list
 sudo apt-get update && sudo apt-get install elasticsearch -y
 /usr/share/elasticsearch/bin/elasticsearch-plugin install ingest-geoip -s
+/usr/share/elasticsearch/bin/elasticsearch-plugin install ingest-user-agent -s
 systemctl daemon-reload
 systemctl enable elasticsearch.service
 systemctl start elasticsearch.service
