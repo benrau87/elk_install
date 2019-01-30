@@ -34,18 +34,17 @@ sed -i 's/#server.host: "localhost"/server.host: "0.0.0.0"/g' /etc/kibana/kibana
 systemctl enable logstash.service
 systemctl start logstash.service
 
-#Filebeat for IIS
+#Filebeat for Local Logs
 curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-6.6.0-amd64.deb
 sudo dpkg -i filebeat-6.6.0-amd64.deb
-filebeat modules enable iis
-sed -i 's|#var.paths:|var.paths: ["/logs/iis/*.log"]|g' /etc/filebeat/modules.d/iis.yml
-filebeat setup -e
+#filebeat modules enable iis
+#sed -i 's|#var.paths:|var.paths: ["/logs/iis/*.log"]|g' /etc/filebeat/modules.d/iis.yml
+filebeat setup
 systemctl enable filebeat.service
 systemctl start filebeat.service
 
 #Samba Share
 mkdir /logs
-mkdir /logs/iis
 chown -R nobody.nogroup /logs
 chmod -R 777 /logs
 apt install samba -y
