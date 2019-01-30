@@ -41,7 +41,7 @@ filebeat modules enable iis
 filebeat setup -e
 
 mkdir /logs
-chmod 777 /logs
+chmod 755 /logs
 
 apt install samba -y
 
