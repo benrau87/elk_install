@@ -5,6 +5,9 @@ fi
 
 apt update && apt upgrade -y
 
+#Java
+apt install -y openjdk-8-jre apt-transport-https wget nginx
+
 #Elasticsearch
 wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
 sudo apt-get install apt-transport-https
