@@ -53,7 +53,7 @@ echo "security = user" >> /etc/samba/smb.conf
 echo "map to guest = bad user" >> /etc/samba/smb.conf
 echo "dns proxy = no" >> /etc/samba/smb.conf
 echo "[Logs]" >> /etc/samba/smb.conf
-echo "path = /iislogs" >> /etc/samba/smb.conf
+echo "path = /logs" >> /etc/samba/smb.conf
 echo "browsable =yes" >> /etc/samba/smb.conf
 echo "writable = yes" >> /etc/samba/smb.conf
 echo "guest ok = yes" >> /etc/samba/smb.conf
