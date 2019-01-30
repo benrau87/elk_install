@@ -13,6 +13,7 @@ wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add
 sudo apt-get install apt-transport-https
 echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-6.x.list
 sudo apt-get update && sudo apt-get install elasticsearch -y
+/usr/share/elasticsearch/bin/elasticsearch-plugin install ingest-geoip -s
 systemctl daemon-reload
 systemctl enable elasticsearch.service
 systemctl start elasticsearch.service
@@ -32,20 +33,21 @@ sed -i 's/#server.host: "localhost"/server.host: "0.0.0.0"/g' /etc/kibana/kibana
 systemctl enable logstash.service
 systemctl start logstash.service
 
-#Filebeat
+#Filebeat for IIS
 curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-6.6.0-amd64.deb
 sudo dpkg -i filebeat-6.6.0-amd64.deb
+filebeat modules enable iis
+sed -i 's|#var.paths:|var.paths: ["/logs/iis/*.log"]|g' /etc/filebeat/modules.d/iis.yml
+filebeat setup -e
 systemctl enable filebeat.service
 systemctl start filebeat.service
-filebeat modules enable iis
-filebeat setup -e
 
+#Samba Share
 mkdir /logs
-chown nobody.nogroup /logs
-chmod 777 /logs
-
+mkdir /logs/iis
+chown -R nobody.nogroup /logs
+chmod -R 777 /logs
 apt install samba -y
-
 echo "[global]" > /etc/samba/smb.conf
 echo "workgroup = WORKGROUP" >> /etc/samba/smb.conf
 echo "server string = SOF-ELK Server %v" >> /etc/samba/smb.conf
@@ -60,10 +62,8 @@ echo "browseable = yes" >> /etc/samba/smb.conf
 echo "read only = no" >> /etc/samba/smb.conf
 echo "guest ok = yes" >> /etc/samba/smb.conf
 echo "create mask = 777" >> /etc/samba/smb.conf
-
 systemctl enable smb.service
 systemctl enable nmb.service
 systemctl start smb.service
 systemctl start nmb.service
 
-reboot
