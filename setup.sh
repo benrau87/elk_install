@@ -38,8 +38,8 @@ systemctl start filebeat.service
 filebeat modules enable iis
 filebeat setup -e
 
-mkdir /iislogs
-chmod 777 /iislogs
+mkdir /logs
+chmod 777 /logs
 
 apt install samba -y
 
@@ -50,7 +50,7 @@ echo "netbios name = sof-elk" >> /etc/samba/smb.conf
 echo "security = user" >> /etc/samba/smb.conf
 echo "map to guest = bad user" >> /etc/samba/smb.conf
 echo "dns proxy = no" >> /etc/samba/smb.conf
-echo "[IIS_Logs]" >> /etc/samba/smb.conf
+echo "[Logs]" >> /etc/samba/smb.conf
 echo "path = /iislogs" >> /etc/samba/smb.conf
 echo "browsable =yes" >> /etc/samba/smb.conf
 echo "writable = yes" >> /etc/samba/smb.conf
