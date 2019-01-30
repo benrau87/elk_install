@@ -28,6 +28,7 @@ systemctl start kibana.service
 wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
 echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-6.x.list
 apt-get update && sudo apt-get install logstash -y
+sed -i 's/#server.host: "localhost"/server.host: "0.0.0.0"/g' /etc/kibana/kibana.yml
 systemctl enable logstash.service
 systemctl start logstash.service
 
