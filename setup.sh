@@ -37,7 +37,6 @@ systemctl daemon-reload
 systemctl start filebeat.service
 filebeat modules enable iis
 filebeat setup -e
-reboot
 
 mkdir /iislogs
 chmod 777 /iislogs
@@ -63,3 +62,5 @@ systemctl enable smb.service
 systemctl enable nmb.service
 systemctl start smb.service
 systemctl start nmb.service
+
+reboot
