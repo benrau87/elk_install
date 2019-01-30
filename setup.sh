@@ -35,6 +35,31 @@ curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-6.6.0-
 sudo dpkg -i filebeat-6.6.0-amd64.deb
 systemctl daemon-reload
 systemctl start filebeat.service
-
-
+filebeat modules enable iis
+filebeat setup -e
 reboot
+
+mkdir /iislogs
+chmod 777 /iislogs
+
+apt install samba -y
+
+echo "[global]" > /etc/samba/smb.conf
+echo "workgroup = WORKGROUP" >> /etc/samba/smb.conf
+echo "server string = SOF-ELK Server %v" >> /etc/samba/smb.conf
+echo "netbios name = sof-elk" >> /etc/samba/smb.conf
+echo "security = user" >> /etc/samba/smb.conf
+echo "map to guest = bad user" >> /etc/samba/smb.conf
+echo "dns proxy = no" >> /etc/samba/smb.conf
+echo "[Anonymous]" >> /etc/samba/smb.conf
+echo "path = /iislogs" >> /etc/samba/smb.conf
+echo "browsable =yes" >> /etc/samba/smb.conf
+echo "writable = yes" >> /etc/samba/smb.conf
+echo "guest ok = yes" >> /etc/samba/smb.conf
+echo "read only = no" >> /etc/samba/smb.conf
+firewall-cmd --permanent --zone=public --add-service=samba
+firewall-cmd --reload
+systemctl enable smb.service
+systemctl enable nmb.service
+systemctl start smb.service
+systemctl start nmb.service
