@@ -44,26 +44,26 @@ systemctl enable filebeat.service
 systemctl start filebeat.service
 
 #Samba Share
-mkdir /logs
-chown -R nobody.nogroup /logs
-chmod -R 777 /logs
-apt install samba -y
-echo "[global]" > /etc/samba/smb.conf
-echo "workgroup = WORKGROUP" >> /etc/samba/smb.conf
-echo "server string = SOF-ELK Server %v" >> /etc/samba/smb.conf
-echo "netbios name = sof-elk" >> /etc/samba/smb.conf
-echo "security = user" >> /etc/samba/smb.conf
-echo "map to guest = bad user" >> /etc/samba/smb.conf
-echo "dns proxy = no" >> /etc/samba/smb.conf
-echo "[Logs]" >> /etc/samba/smb.conf
-echo "path = /logs" >> /etc/samba/smb.conf
-echo "writeable = yes" >> /etc/samba/smb.conf
-echo "browseable = yes" >> /etc/samba/smb.conf
-echo "read only = no" >> /etc/samba/smb.conf
-echo "guest ok = yes" >> /etc/samba/smb.conf
-echo "create mask = 777" >> /etc/samba/smb.conf
-systemctl enable smb.service
-systemctl enable nmb.service
-systemctl start smb.service
-systemctl start nmb.service
+#mkdir /logs
+#chown -R nobody.nogroup /logs
+#chmod -R 777 /logs
+#apt install samba -y
+#echo "[global]" > /etc/samba/smb.conf
+#echo "workgroup = WORKGROUP" >> /etc/samba/smb.conf
+#echo "server string = SOF-ELK Server %v" >> /etc/samba/smb.conf
+#echo "netbios name = sof-elk" >> /etc/samba/smb.conf
+#echo "security = user" >> /etc/samba/smb.conf
+#echo "map to guest = bad user" >> /etc/samba/smb.conf
+#echo "dns proxy = no" >> /etc/samba/smb.conf
+#echo "[Logs]" >> /etc/samba/smb.conf
+#echo "path = /logs" >> /etc/samba/smb.conf
+#echo "writeable = yes" >> /etc/samba/smb.conf
+#echo "browseable = yes" >> /etc/samba/smb.conf
+#echo "read only = no" >> /etc/samba/smb.conf
+#echo "guest ok = yes" >> /etc/samba/smb.conf
+#echo "create mask = 777" >> /etc/samba/smb.conf
+#systemctl enable smb.service
+#systemctl enable nmb.service
+#systemctl start smb.service
+#systemctl start nmb.service
 
