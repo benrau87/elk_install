@@ -27,7 +27,7 @@ read HOSTIPADDR
 #Sources
 add-apt-repository ppa:webupd8team/java -y
 wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
-echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-6.x.list
+echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-6.x.list
 echo debconf shared/accepted-oracle-license-v1-1 select true | \
 debconf-set-selections
 apt update
