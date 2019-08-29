@@ -33,7 +33,7 @@ debconf-set-selections
 apt update
 
 #Java and deps
-apt install -y apt-transport-https wget nginx apache2-utils
+apt install -y apt-transport-https wget nginx apache2-utils openjdk-11-jre-headless
 #openjdk-8-jre
 
 #Elasticsearch
