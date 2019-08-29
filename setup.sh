@@ -54,8 +54,8 @@ systemctl enable logstash.service
 systemctl start logstash.service
 
 #Filebeat for Local Logs
-curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-6.6.0-amd64.deb
-sudo dpkg -i filebeat-6.6.0-amd64.deb
+curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.3.1-amd64.deb
+sudo dpkg -i filebeat-7.3.1-amd64.deb
 filebeat setup
 systemctl enable filebeat.service
 systemctl start filebeat.service
