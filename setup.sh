@@ -33,7 +33,7 @@ debconf-set-selections
 apt update
 
 #Java and deps
-apt install -y apt-transport-https wget nginx apache2-utils openjdk-11-jre-headless
+apt install -y apt-transport-https wget nginx apache2-utils openjdk-11-jre-headless samba cifs-utils
 #openjdk-8-jre
 
 #Elasticsearch
@@ -104,6 +104,26 @@ echo "$newDefault" >> /etc/nginx/sites-available/default
 
 systemctl restart nginx
 
+mkdir /logstash/eventlogs
+chmod 777 /logstash/eventlogs
+cp -pf /etc/samba/smb.conf /etc/samba/smb.conf.bak
+cat /dev/null > /etc/samba/smb.conf
+
+echo "[global]" > /etc/samba/smb.conf
+echo "workgroup = WORKGROUP" >> /etc/samba/smb.conf
+echo "server string = SOF-ELK Server %v" >> /etc/samba/smb.conf
+echo "netbios name = sof-elk" >> /etc/samba/smb.conf
+echo "security = user" >> /etc/samba/smb.conf
+echo "map to guest = bad user" >> /etc/samba/smb.conf
+echo "dns proxy = no" >> /etc/samba/smb.conf
+echo "[Anonymous]" >> /etc/samba/smb.conf
+echo "path = /logstash" >> /etc/samba/smb.conf
+echo "browsable =yes" >> /etc/samba/smb.conf
+echo "writable = yes" >> /etc/samba/smb.conf
+echo "guest ok = yes" >> /etc/samba/smb.conf
+echo "read only = no" >> /etc/samba/smb.conf
+
+service smbd restart
 #Extras if you want
 #/usr/share/elasticsearch/bin/elasticsearch-plugin install --silent --batch ingest-geoip ingest-user-agent 
 #/usr/share/logstash/bin/logstash-plugin install logstash-filter-dns --silent
