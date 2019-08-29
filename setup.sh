@@ -104,6 +104,7 @@ echo "$newDefault" >> /etc/nginx/sites-available/default
 
 systemctl restart nginx
 
+mkdir /logstash
 mkdir /logstash/eventlogs
 chmod 777 /logstash/eventlogs
 cp -pf /etc/samba/smb.conf /etc/samba/smb.conf.bak
