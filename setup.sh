@@ -59,7 +59,7 @@ sudo dpkg -i filebeat-7.3.1-amd64.deb
 filebeat setup
 systemctl enable filebeat.service
 systemctl start filebeat.service
-rm filebeat-6.6.0-amd64.deb
+rm filebeat-*
     
 htpasswd -b -c /etc/nginx/htpasswd.users $nginxUsername $passvar1 
     
